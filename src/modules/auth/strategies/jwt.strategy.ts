@@ -4,8 +4,8 @@ import { Request } from 'express';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Injectable } from '@nestjs/common';
 
-import { TokenPayload } from '../types/token-payload';
 import { Env } from 'src/common/env/env';
+import { LoggedInUser, TokenPayload } from '../types';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -20,7 +20,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  validate(payload: TokenPayload) {
+  validate(payload: TokenPayload): LoggedInUser {
     return {
       id: payload.sub,
       email: payload.email,

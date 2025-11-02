@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { TokenType } from '../types/token-type';
+import { TokenType } from '../types';
 import { Env } from 'src/common/env/env';
 
 @Injectable()

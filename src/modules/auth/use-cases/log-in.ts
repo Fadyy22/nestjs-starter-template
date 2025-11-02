@@ -6,7 +6,7 @@ import * as bcrypt from 'bcrypt';
 import { GenerateToken } from './generate-token';
 import { UserRepository } from 'src/modules/users/repositories/user.repository';
 import { User } from 'src/modules/users/entities/user.entity';
-import { TokenPayload } from '../types/token-payload';
+import { TokenPayload } from '../types';
 import { GetTokenExpirationDate } from './get-token-expiration-date';
 import { Env } from 'src/common/env/env';
 

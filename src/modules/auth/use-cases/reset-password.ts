@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import * as bcrypt from 'bcrypt';
 
 import { UserRepository } from 'src/modules/users/repositories/user.repository';
-import { TokenPayload } from '../types/token-payload';
+import { TokenPayload } from '../types';
 import { Env } from 'src/common/env/env';
 
 @Injectable()
