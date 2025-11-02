@@ -60,7 +60,10 @@ export class LogIn {
     });
 
     return {
-      user,
+      user: {
+        id: user.id,
+        email: user.email,
+      },
     };
   }
 }
