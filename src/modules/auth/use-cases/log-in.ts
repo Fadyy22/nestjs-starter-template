@@ -57,6 +57,7 @@ export class LogIn {
       secure: isProduction,
       sameSite: isProduction ? 'none' : 'lax',
       expires: expiresRefreshToken,
+      path: '/api/auth/refresh',
     });
 
     return {

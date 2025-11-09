@@ -67,7 +67,7 @@ export class AuthController {
   }
 
   @Patch('reset-password')
-  changePassword(@Body() body: ResetPasswordDto) {
+  resetPassword(@Body() body: ResetPasswordDto) {
     return this.resetPasswordUseCase.execute(body.resetToken, body.newPassword);
   }
 }
