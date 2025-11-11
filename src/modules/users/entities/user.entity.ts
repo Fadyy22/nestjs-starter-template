@@ -7,6 +7,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+import { AuthProvider } from 'src/modules/auth/enums/auth-provider';
+
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -16,13 +18,13 @@ export class User {
   full_name: string;
 
   @Column({ unique: true })
-  username: string;
-
-  @Column({ unique: true })
   email: string;
 
-  @Column()
-  password: string;
+  @Column({ type: 'text', nullable: true })
+  password: string | null;
+
+  @Column({ type: 'enum', enum: AuthProvider, nullable: true })
+  provider: AuthProvider | null;
 
   @Column({ type: 'text', nullable: true })
   refresh_token: string | null;
