@@ -16,10 +16,6 @@ const SignUpSchema = z.object({
     .string()
     .min(1, 'Full name is required')
     .transform((value) => value.trim()),
-  username: z
-    .string()
-    .min(1, 'Username is required')
-    .transform((value) => value.trim()),
 });
 
 export class SignUpDto extends createZodDto(SignUpSchema) {}
