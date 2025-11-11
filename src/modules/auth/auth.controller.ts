@@ -1,8 +1,16 @@
-import { Body, Controller, Patch, Post, Res, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Patch,
+  Post,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import type { Response } from 'express';
 
 import { Public } from './decorators/public.decorator';
-import { LocalAuthGuard, JwtRefreshAuthGuard } from './guards';
+import { LocalAuthGuard, JwtRefreshAuthGuard, GoogleAuthGuard } from './guards';
 import { User } from '../users/entities/user.entity';
 import { CurrentUser } from 'src/common/decorators/current-user.decorator';
 import {
@@ -69,5 +77,18 @@ export class AuthController {
   @Patch('reset-password')
   resetPassword(@Body() body: ResetPasswordDto) {
     return this.resetPasswordUseCase.execute(body.resetToken, body.newPassword);
+  }
+
+  @Get('google')
+  @UseGuards(GoogleAuthGuard)
+  googleAuth() {}
+
+  @Get('google/callback')
+  @UseGuards(GoogleAuthGuard)
+  googleAuthCallback(
+    @CurrentUser() user: User,
+    @Res({ passthrough: true }) response: Response,
+  ) {
+    return this.logInUseCase.execute(user, response, true);
   }
 }

@@ -15,7 +15,12 @@ import {
   VerifyUserRefreshToken,
   SignUp,
 } from './use-cases';
-import { LocalStrategy, JwtStrategy, JwtRefreshStrategy } from './strategies';
+import {
+  LocalStrategy,
+  JwtStrategy,
+  JwtRefreshStrategy,
+  GoogleStrategy,
+} from './strategies';
 
 @Module({
   imports: [JwtModule, UsersModule],
@@ -33,6 +38,7 @@ import { LocalStrategy, JwtStrategy, JwtRefreshStrategy } from './strategies';
     LocalStrategy,
     JwtStrategy,
     JwtRefreshStrategy,
+    GoogleStrategy,
   ],
 })
 export class AuthModule {}

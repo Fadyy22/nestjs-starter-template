@@ -19,7 +19,7 @@ export class LogIn {
     private readonly configService: ConfigService,
   ) {}
 
-  async execute(user: User, response: Response) {
+  async execute(user: User, response: Response, redirect = false) {
     const tokenPayload: TokenPayload = {
       sub: user.id,
       email: user.email,
@@ -60,11 +60,8 @@ export class LogIn {
       path: '/api/auth/refresh',
     });
 
-    return {
-      user: {
-        id: user.id,
-        email: user.email,
-      },
-    };
+    if (redirect) {
+      response.redirect(this.configService.getOrThrow(Env.CORS_ORIGIN));
+    }
   }
 }
