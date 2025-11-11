@@ -22,7 +22,10 @@ export class VerifyUser {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      user.password as string,
+    );
 
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid credentials');
