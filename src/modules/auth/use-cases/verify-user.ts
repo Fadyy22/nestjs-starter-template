@@ -15,17 +15,23 @@ export class VerifyUser {
         id: true,
         email: true,
         password: true,
+        provider: true,
       },
     });
 
-    if (!user) {
+    if (user?.provider) {
+      const capitalizedProvider =
+        user.provider.charAt(0).toUpperCase() + user.provider.slice(1);
+      throw new UnauthorizedException(
+        `Your account is linked to a ${capitalizedProvider} account, please log in with ${capitalizedProvider} instead.`,
+      );
+    }
+
+    if (!user || !user.password) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    const isPasswordValid = await bcrypt.compare(
-      password,
-      user.password as string,
-    );
+    const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid credentials');
