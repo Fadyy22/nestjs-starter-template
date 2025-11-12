@@ -41,8 +41,11 @@ export class AuthController {
   ) {}
 
   @Post('sign-up')
-  signUp(@Body() body: SignUpDto) {
-    return this.signUpUseCase.execute(body);
+  signUp(
+    @Body() body: SignUpDto,
+    @Res({ passthrough: true }) response: Response,
+  ) {
+    return this.signUpUseCase.execute(body, response);
   }
 
   @Post('log-in')
